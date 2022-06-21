@@ -14,7 +14,7 @@ import com.example.kotlin_app.R
 import com.example.kotlin_app.data.models.SearchResponse
 import com.example.kotlin_app.data.services.RequestManager
 import com.example.kotlin_app.data.services.SearchResponseListener
-import kotlinx.android.synthetic.main.fragment_rn_tab.*
+import kotlinx.android.synthetic.main.fragment_native_tab.*
 
 class NativeFragment : Fragment() {
 
@@ -27,7 +27,7 @@ class NativeFragment : Fragment() {
     ): View? {
         nativeViewModel =
                 ViewModelProvider(this).get(NativeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_rn_tab, container, false)
+        val root = inflater.inflate(R.layout.fragment_native_tab, container, false)
 
         RequestManager(requireContext()).getSearchResults(listener)
         dialog = ProgressDialog(requireContext())

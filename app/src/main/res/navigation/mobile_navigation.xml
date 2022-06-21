@@ -9,12 +9,12 @@
         android:id="@+id/navigation_native_fragment"
         android:name="com.example.kotlin_app.ui.native_tab.NativeFragment"
         android:label="@string/title_native"
-        tools:layout="@layout/fragment_rn_tab" />
+        tools:layout="@layout/fragment_native_tab" />
 
     <fragment
         android:id="@+id/navigation_rn_fragment"
         android:name="com.example.kotlin_app.ui.rn_tab.RNFragment"
         android:label="@string/title_react"
-        tools:layout="@layout/fragment_native_tab" />
+        tools:layout="@layout/fragment_rn_tab" />
 
 </navigation>

@@ -21,7 +21,7 @@ class RNFragment : Fragment() {
     ): View? {
         rnViewModel =
                 ViewModelProvider(this).get(RNViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_native_tab, container, false)
+        val root = inflater.inflate(R.layout.fragment_rn_tab, container, false)
         val textView: TextView = root.findViewById(R.id.text_dashboard)
         rnViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
