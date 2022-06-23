@@ -66,8 +66,21 @@ class NativeFragment : Fragment(R.layout.fragment_native_tab) {
         var searchView = searchItem.actionView as SearchView
 
         searchView.onQueryTextChanged {
-            viewModel.currentQuery.value = it
+            viewModel.searchQuery.value = it
         }
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+       return when(item.itemId){
+            R.id.action_sort_by_asc -> {
+                viewModel.sortOrder.value = SortOrder.BY_ASC
+                true
+            }
+           R.id.action_sort_by_desc -> {
+               viewModel.sortOrder.value = SortOrder.BY_DESC
+               true
+           }
+           else -> super.onOptionsItemSelected(item)
+        }
+    }
 }
