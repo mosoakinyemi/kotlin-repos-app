@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ReposDao {
-    @Query("SELECT * FROM repos")
-    fun getAllRepos(): Flow<List<RepoItem>>
+    @Query("SELECT * FROM repos WHERE name LIKE '%' || :searchQuery || '%'")
+    fun getAllRepos(searchQuery: String): Flow<List<RepoItem>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRepos(repos: List<RepoItem>)

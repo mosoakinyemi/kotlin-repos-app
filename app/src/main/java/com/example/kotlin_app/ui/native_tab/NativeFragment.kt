@@ -57,6 +57,17 @@ class NativeFragment : Fragment(R.layout.fragment_native_tab) {
             dialog?.dismiss()
         }
         }
+        setHasOptionsMenu(true)
     }
-    
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.top_menu,menu)
+        var searchItem = menu.findItem(R.id.action_search)
+        var searchView = searchItem.actionView as SearchView
+
+        searchView.onQueryTextChanged {
+            viewModel.currentQuery.value = it
+        }
+    }
+
 }

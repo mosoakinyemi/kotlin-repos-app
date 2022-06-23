@@ -13,14 +13,14 @@ class ReposRepository @Inject constructor(
 ) {
     private val reposDao = db.reposDao()
 
-    fun getRepos() = networkBoundResource(
+    fun getRepos(searchQuery: String) = networkBoundResource(
         query = {
-            reposDao.getAllRepos()
+            reposDao.getAllRepos(searchQuery)
         },
         fetch = {
             delay(1000)
             Log.d("FETCHEING REPOS","HERE")
-            api.searchRepos()
+            api.searchRepos(searchQuery)
         },
         saveFetchResult = { response ->
             db.withTransaction {
