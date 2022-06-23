@@ -2,54 +2,61 @@ package com.example.kotlin_app.ui.native_tab
 
 import android.app.ProgressDialog
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.kotlin_app.R
-import com.example.kotlin_app.data.models.SearchResponse
-import com.example.kotlin_app.data.services.RequestManager
-import com.example.kotlin_app.data.services.SearchResponseListener
-import kotlinx.android.synthetic.main.fragment_native_tab.*
+import com.example.kotlin_app.databinding.FragmentNativeTabBinding
+import com.example.kotlin_app.utils.Resource
+import com.example.kotlin_app.utils.onQueryTextChanged
+import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
-class NativeFragment : Fragment() {
+@AndroidEntryPoint
+class NativeFragment : Fragment(R.layout.fragment_native_tab) {
 
     var dialog: ProgressDialog? = null
     private lateinit var nativeViewModel: NativeViewModel
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        nativeViewModel =
-                ViewModelProvider(this).get(NativeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_native_tab, container, false)
+    private val viewModel: NativeViewModel by viewModels()
 
-        RequestManager(requireContext()).getSearchResults(listener)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val binding = FragmentNativeTabBinding.bind(view)
+
+        val reposAdapter = RepoItemAdapter()
         dialog = ProgressDialog(requireContext())
-        dialog?.setTitle("Loading...")
-        dialog?.show()
-        return root
-    }
+        binding.apply {
+            recyclerView.apply {
+                adapter = reposAdapter
+                layoutManager = LinearLayoutManager(requireContext())
+            }
 
-    private val listener: SearchResponseListener = object: SearchResponseListener {
-        override fun didFetch(response: SearchResponse, message: String) {
+        viewModel.repos.observe(viewLifecycleOwner){
+             result ->
+            Log.d("FETCHED REPOS FRAG", result.data.toString())
+            reposAdapter.submitList(result.data)
+
+            if (result is Resource.Loading && result.data.isNullOrEmpty()){
+                dialog?.setTitle("Loading...")
+                dialog?.show()
+            }
+            if (result is Resource.Error && result.data.isNullOrEmpty()){
+                Log.d("FETCH Display Error", result.error?.localizedMessage.toString())
+
+                dialog?.setTitle(result.error?.localizedMessage)
+                dialog?.show()
+            }
             dialog?.dismiss()
-            recycler_home.setHasFixedSize(true)
-            recycler_home.layoutManager = StaggeredGridLayoutManager(1,LinearLayoutManager.VERTICAL)
-            val adapter = ReposListAdapter(requireContext(),response)
-            recycler_home.adapter = adapter
         }
-
-        override fun didError(message: String) {
-            dialog?.dismiss()
-            Toast.makeText(requireContext(),message,Toast.LENGTH_LONG).show()
         }
-
     }
-
+    
 }

@@ -9,7 +9,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Kotlin_app">
+        android:theme="@style/Theme.Kotlin_app"
+        android:name=".MainApplication"
+
+        >
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">

@@ -1,13 +1,15 @@
 package com.example.kotlin_app.ui.native_tab
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import com.example.kotlin_app.data.data.ReposRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class NativeViewModel : ViewModel() {
+@HiltViewModel
+class NativeViewModel @Inject constructor(
+    repository: ReposRepository
+) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
+    val repos = repository.getRepos().asLiveData()
 }
