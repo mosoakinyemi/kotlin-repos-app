@@ -15,12 +15,12 @@ class RNFragment : Fragment() {
     private lateinit var rnViewModel: RNViewModel
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         rnViewModel =
-                ViewModelProvider(this).get(RNViewModel::class.java)
+            ViewModelProvider(this).get(RNViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_rn_tab, container, false)
         val textView: TextView = root.findViewById(R.id.text_dashboard)
         rnViewModel.text.observe(viewLifecycleOwner, Observer {

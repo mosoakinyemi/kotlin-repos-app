@@ -1,0 +1,15 @@
+{
+  "name": "ReactNativeApp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "yarn react-native start"
+  },
+  "dependencies": {
+    "@react-native-community/cli": "^8.0.2",
+    "@react-native-community/cli-platform-android": "^8.0.2",
+    "@react-native-community/cli-platform-ios": "^8.0.2",
+    "react": "18.0.0",
+    "react-native": "^0.69.0"
+  }
+}
