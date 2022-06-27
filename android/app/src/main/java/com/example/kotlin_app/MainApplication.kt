@@ -7,7 +7,6 @@ import com.facebook.react.ReactNativeHost
 import com.facebook.react.ReactPackage
 import com.facebook.soloader.SoLoader
 import dagger.hilt.android.HiltAndroidApp
-import okhttp3.internal.toImmutableList
 
 @HiltAndroidApp
 class MainApplication : Application(), ReactApplication {
@@ -19,7 +18,7 @@ class MainApplication : Application(), ReactApplication {
         object : ReactNativeHost(this) {
             override fun getUseDeveloperSupport() = BuildConfig.DEBUG
             override fun getPackages(): List<ReactPackage> {
-                val packages = PackageList(this).getPackages().toImmutableList()
+                val packages = PackageList(this).getPackages()
                 // Packages that cannot be autolinked yet can be added manually here
                 return packages
             }
