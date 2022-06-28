@@ -13,14 +13,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlin_app.R
+import com.example.kotlin_app.data.models.RepoItem
 import com.example.kotlin_app.databinding.FragmentNativeTabBinding
 import com.example.kotlin_app.utils.Resource
 import com.example.kotlin_app.utils.onQueryTextChanged
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 
 @AndroidEntryPoint
-class NativeFragment : Fragment(R.layout.fragment_native_tab) {
+class NativeFragment : Fragment(R.layout.fragment_native_tab),OnItemClickListener {
 
     var dialog: ProgressDialog? = null
     private lateinit var nativeViewModel: NativeViewModel
@@ -31,7 +31,8 @@ class NativeFragment : Fragment(R.layout.fragment_native_tab) {
 
         val binding = FragmentNativeTabBinding.bind(view)
 
-        val reposAdapter = RepoItemAdapter()
+        val reposAdapter = RepoItemAdapter(this)
+
         dialog = ProgressDialog(requireContext())
         binding.apply {
             recyclerView.apply {
@@ -49,8 +50,6 @@ class NativeFragment : Fragment(R.layout.fragment_native_tab) {
                 dialog?.show()
             }
             if (result is Resource.Error && result.data.isNullOrEmpty()){
-                Log.d("FETCH Display Error", result.error?.localizedMessage.toString())
-
                 dialog?.setTitle(result.error?.localizedMessage)
                 dialog?.show()
             }
@@ -82,5 +81,9 @@ class NativeFragment : Fragment(R.layout.fragment_native_tab) {
            }
            else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onItemClick(repo: RepoItem) {
+        viewModel.onRepoItemSelected(repo)
     }
 }

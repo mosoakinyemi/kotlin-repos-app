@@ -1,8 +1,10 @@
 package com.example.kotlin_app.ui.native_tab
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.example.kotlin_app.data.data.ReposRepository
+import com.example.kotlin_app.data.models.RepoItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -28,12 +30,12 @@ class NativeViewModel @Inject constructor(
             repository.getRepos(query,sortOrder)
         } ?: emptyFlow()
     }
+    val repos = searchResults.asLiveData()
 
-    fun onSearchQuerySubmit(query: String) {
-        searchQuery.value = query
+    fun onRepoItemSelected(selectedRepo: RepoItem) {
+        Log.d("Button Click", selectedRepo.description.toString())
     }
 
-    val repos = searchResults.asLiveData()
 }
 
 enum class SortOrder {BY_ASC, BY_DESC}
