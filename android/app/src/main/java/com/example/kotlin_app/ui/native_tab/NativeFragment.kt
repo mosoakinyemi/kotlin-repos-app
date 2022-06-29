@@ -23,7 +23,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class NativeFragment : Fragment(R.layout.fragment_native_tab),OnItemClickListener {
 
     var dialog: ProgressDialog? = null
-    private lateinit var nativeViewModel: NativeViewModel
     private val viewModel: NativeViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,7 +41,6 @@ class NativeFragment : Fragment(R.layout.fragment_native_tab),OnItemClickListene
 
         viewModel.repos.observe(viewLifecycleOwner){
              result ->
-            Log.d("FETCHED REPOS FRAG", result.data.toString())
             reposAdapter.submitList(result.data)
 
             if (result is Resource.Loading && result.data.isNullOrEmpty()){
