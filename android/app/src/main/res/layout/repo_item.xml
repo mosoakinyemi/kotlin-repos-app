@@ -41,6 +41,22 @@
                 android:textAlignment="textStart"
                 android:textSize="15sp"
                 android:textStyle="italic" />
+            <TextView
+                android:id="@+id/texView_createdAt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="textStart"
+                android:textSize="15sp"
+                android:textStyle="italic" />
+            <TextView
+                android:id="@+id/texView_stars"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAlignment="textStart"
+                android:textSize="15sp"
+                android:textStyle="italic" />
 
         </LinearLayout>
     </LinearLayout>

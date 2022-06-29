@@ -1,15 +1,19 @@
 package com.example.kotlin_app.ui.native_tab
 
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin_app.data.models.RepoItem
 import com.example.kotlin_app.databinding.RepoItemBinding
 import com.squareup.picasso.Picasso
+import java.time.LocalDateTime
+import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 interface OnItemClickListener{
     fun onItemClick (repo: RepoItem)
@@ -41,11 +45,19 @@ class RepoItemAdapter( private val listener:OnItemClickListener
     class ReposViewHolder(private val binding: RepoItemBinding,
                           private val onItemClick: (Int) -> Unit,
     ) :  RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("NewApi")
         fun bind(repo: RepoItem) {
             binding.apply {
+
+                val formatter = DateTimeFormatter.ofPattern("MMM dd yyyy")
+                val createdAt = formatter.format(OffsetDateTime.parse(repo.created_at))
+
+                texViewTitle.text = repo.name
+                texViewOwner.text = "owner: "+ repo.owner.login
+                texViewCreatedAt.text = "Created at: " + createdAt
+                texViewStars.text = "Stars: " + repo.stargazers_count
                 Picasso.get().load(repo.owner.avatar_url).into(userAvatar)
-                texViewOwner.text = repo.owner.login
-                texViewTitle.text = repo.full_name
+
             }
         }
 
