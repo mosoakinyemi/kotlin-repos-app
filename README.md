@@ -39,8 +39,8 @@ Run from Android Studio
 
 ## Screenshots
 ![Screenshot 2022-06-29 at 03 01 47](https://user-images.githubusercontent.com/41248079/177983499-9c57bddf-e4f5-4a5c-ad8c-7695d1d69c59.png)
-<img src="https://user-images.githubusercontent.com/41248079/177983897-64fdfff0-18ac-4e34-b014-323aecdf001d.png" width="280px" style="margin-right:10px" /> 
-<img src="https://user-images.githubusercontent.com/41248079/177983594-066a4104-3296-49a9-a6b3-19d0a50da201.png" width="280px" style="margin-right:10px" /> 
-<img src="https://user-images.githubusercontent.com/41248079/177983605-a8374c07-3a02-4ceb-81f2-5245d0fe1e76.png" width="280px" /> 
+<img src="https://user-images.githubusercontent.com/41248079/177983897-64fdfff0-18ac-4e34-b014-323aecdf001d.png" width="250px" style="margin-right:10px" /> 
+<img src="https://user-images.githubusercontent.com/41248079/177983594-066a4104-3296-49a9-a6b3-19d0a50da201.png" width="250px" style="margin-right:10px" /> 
+<img src="https://user-images.githubusercontent.com/41248079/177983605-a8374c07-3a02-4ceb-81f2-5245d0fe1e76.png" width="250px" /> 
 
 
